@@ -135,6 +135,16 @@ main{max-width:1320px;padding:34px 30px}
 .shop-section{border-radius:10px 34px 10px 34px}
 .shop-head{padding-bottom:14px;border-bottom:1px solid #f0e7f1}
 @media(max-width:650px){.premium-tag,.discount-tag{font-size:9px;padding:4px 7px}.premium-price{font-size:17px}}
+
+/* GRAND typography and category image controls */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap');
+body,button,input,select,textarea{font-family:'Tajawal',Tahoma,Arial,sans-serif}
+.category-overlay h3{font-size:28px;letter-spacing:-.3px;line-height:1.35}
+.category-overlay p{font-size:14px;line-height:1.8}
+.category-image-manager{margin:25px 0;padding:20px;background:#faf6fb;border:1px solid #e8d9ec;border-radius:16px}
+.category-image-manager h3{margin-top:0;color:var(--plum)}
+.category-no-image{height:100%;min-height:230px;display:grid;place-items:center;background:linear-gradient(145deg,#f1e7f4,#d9c5e2);font-size:72px;color:#583563}
+.category-card img{object-fit:cover}
 </style>
 <meta name="theme-color" content="#492451">
 <meta name="description" content="متجر GRAND - تسوق منتجات جراند بسهولة">
@@ -164,36 +174,36 @@ main{max-width:1320px;padding:34px 30px}
 <section class="group-invite" id="facebook-page" style="background:linear-gradient(110deg,#edf2ff,#fff);border-color:#d5def8"><div><h2 style="color:#234b9b">تابع صفحة GRAND على فيسبوك 💙</h2><p style="color:#5b6f98">تابعونا على صفحتنا لمعرفة أخبارنا وعروضنا الجديدة.</p></div><a style="background:#1877f2" href="https://www.facebook.com/qr?id=100063722065997" target="_blank" rel="noopener">زيارة صفحة GRAND على فيسبوك</a></section>
 <section id="categories"><div class="section-title"><div><div class="eyebrow">اختار اللي محتاجه</div><h2>تسوّق بالأقسام</h2><p>كل قسم معمول علشان توصل لطلبك أسرع</p></div></div>
 <div class="categories">
-<button class="category-card" onclick="filter('منظفات')">
+<button class="category-card" data-category="منظفات" onclick="filter('منظفات')">
 <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=900" alt="منتجات المنظفات">
 <div class="category-overlay"><span>01 / GRAND</span><h3>المنظفات</h3><p>نظافة وانتعاش لكل بيت</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('مستحضرات')">
+<button class="category-card" data-category="مستحضرات" onclick="filter('مستحضرات')">
 <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900" alt="مستحضرات التجميل">
 <div class="category-overlay"><span>02 / GRAND</span><h3>مستحضرات التجميل</h3><p>اهتمام وجمال كل يوم</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('أدوات منزلية')">
+<button class="category-card" data-category="أدوات منزلية" onclick="filter('أدوات منزلية')">
 <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=900" alt="أدوات منزلية">
 <div class="category-overlay"><span>03 / GRAND</span><h3>الأدوات المنزلية</h3><p>تفاصيل تسهّل حياتك</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('أدوات عامة وخردوات')">
+<button class="category-card" data-category="أدوات عامة وخردوات" onclick="filter('أدوات عامة وخردوات')">
 <img src="https://ii1.pepperfry.com/media/catalog/product/y/e/1600x1760/yellow-elegant-360--bucket-spin-mop-set-by-esquir-yellow-elegant-360--bucket-spin-mop-set-by-esquir-13qyi8.jpg" alt="جردل مسح وممسحة">
 <div class="category-overlay"><span>04 / GRAND</span><h3>أدوات عامة وخردوات</h3><p>مستلزمات وأدوات لكل استخدام</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('ورقيات')">
+<button class="category-card" data-category="ورقيات" onclick="filter('ورقيات')">
 <img src="https://image.made-in-china.com/202f0j00tOLvQIShvEqa/Premium-Soft-Box-Tissue-for-Gentle-Skin-Care-and-Everyday-Use.jpg" alt="علب مناديل ورقية">
 <div class="category-overlay"><span>05 / GRAND</span><h3>الورقيات</h3><p>احتياجاتك الورقية اليومية</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('معطرات')">
+<button class="category-card" data-category="معطرات" onclick="filter('معطرات')">
 <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=900" alt="معطرات">
 <div class="category-overlay"><span>06 / GRAND</span><h3>المعطرات</h3><p>روائح منعشة ولمسة جميلة</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('مبيدات')">
+<button class="category-card" data-category="مبيدات" onclick="filter('مبيدات')">
 <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=900" alt="مبيدات">
 <div class="category-overlay"><span>07 / GRAND</span><h3>المبيدات</h3><p>منتجات مكافحة الحشرات</p><b>تسوّق الآن ←</b></div>
 </button>
-<button class="category-card" onclick="filter('السوايل')">
-<img src="https://down-id.img.susercontent.com/file/id-11134207-7r991-lodu5yzts1zbef" alt="أكياس صابون مواعين">
+<button class="category-card" data-category="السوايل" onclick="filter('السوايل')">
+<div class="category-no-image" aria-label="بدون صورة">💧</div>
 <div class="category-overlay"><span>08 / GRAND</span><h3>السوايل</h3><p>سوائل ومنتجات التنظيف اليومية</p><b>تسوّق الآن ←</b></div>
 </button>
 </div></section>
@@ -202,7 +212,7 @@ main{max-width:1320px;padding:34px 30px}
 </main>
 <section id="admin" class="hidden"><div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2>لوحة مدير GRAND</h2><button class="gray" onclick="shopShow()">العودة للمتجر</button></div>
 <div id="login"><p>أدخل كلمة مرور المدير.</p><input id="pass" type="password" placeholder="كلمة مرور المدير"><button onclick="login()">دخول</button><p class="small">كلمة المرور الافتراضية: 123456 — غيّرها فوراً بعد الدخول.</p></div>
-<div id="manage" class="hidden"><h3>إضافة / تعديل منتج</h3><input id="editId" type="hidden"><label>اسم المنتج</label><input id="name" placeholder="اسم المنتج"><div class="row"><div><label>القسم</label><select id="category"><option>مستحضرات</option><option>منظفات</option><option>أدوات عامة وخردوات</option><option>أدوات منزلية</option><option>ورقيات</option><option>معطرات</option><option>مبيدات</option><option>السوايل</option></select></div><div><label>السعر الحالي بالجنيه</label><input id="price" type="number" min="0" step=".01"></div></div><div class="row"><div><label>السعر قبل الخصم (اختياري)</label><input id="old" type="number" min="0" step=".01"></div><div><label>صورة المنتج</label><input id="image" type="file" accept="image/*"></div></div><label>وصف المنتج</label><textarea id="desc" rows="2"></textarea><button onclick="save()">حفظ المنتج</button> <button class="gray" onclick="clearForm()">تفريغ الحقول</button><p id="msg" class="small"></p><h3>منتجات المتجر</h3><input id="adminSearch" type="search" placeholder="ابحث عن منتج بالاسم أو القسم..." oninput="adminList()"><div id="manageList"></div><hr><h3>تغيير كلمة مرور المدير</h3><input id="newPass" type="password" placeholder="كلمة المرور الجديدة"><button onclick="changePass()">تغيير كلمة المرور</button><p class="small">هذه لوحة محلية للتجربة والإدارة على نفس المتصفح والجهاز فقط.</p><button class="red" onclick="logout()">تسجيل خروج المدير</button></div></div></section>
+<div id="manage" class="hidden"><h3>إضافة / تعديل منتج</h3><input id="editId" type="hidden"><label>اسم المنتج</label><input id="name" placeholder="اسم المنتج"><div class="row"><div><label>القسم</label><select id="category"><option>مستحضرات</option><option>منظفات</option><option>أدوات عامة وخردوات</option><option>أدوات منزلية</option><option>ورقيات</option><option>معطرات</option><option>مبيدات</option><option>السوايل</option></select></div><div><label>السعر الحالي بالجنيه</label><input id="price" type="number" min="0" step=".01"></div></div><div class="row"><div><label>السعر قبل الخصم (اختياري)</label><input id="old" type="number" min="0" step=".01"></div><div><label>صورة المنتج</label><input id="image" type="file" accept="image/*"></div></div><label>وصف المنتج</label><textarea id="desc" rows="2"></textarea><button onclick="save()">حفظ المنتج</button> <button class="gray" onclick="clearForm()">تفريغ الحقول</button><p id="msg" class="small"></p><div class="category-image-manager"><h3>تغيير صور الأقسام</h3><p class="small">اختار القسم وارفع صورته الجديدة. التغيير يُحفظ على نفس المتصفح والجهاز.</p><div class="row"><div><label for="categoryImageName">القسم</label><select id="categoryImageName"><option value="منظفات">المنظفات</option><option value="مستحضرات">مستحضرات التجميل</option><option value="أدوات منزلية">الأدوات المنزلية</option><option value="أدوات عامة وخردوات">أدوات عامة وخردوات</option><option value="ورقيات">الورقيات</option><option value="معطرات">المعطرات</option><option value="مبيدات">المبيدات</option><option value="السوايل">السوايل</option></select></div><div><label for="categoryImageFile">الصورة الجديدة</label><input id="categoryImageFile" type="file" accept="image/*"></div></div><button onclick="saveCategoryImage()">حفظ صورة القسم</button> <button class="gray" onclick="removeCategoryImage()">إزالة الصورة المخصصة</button><p id="categoryImageMsg" class="small"></p></div><h3>منتجات المتجر</h3><input id="adminSearch" type="search" placeholder="ابحث عن منتج بالاسم أو القسم..." oninput="adminList()"><div id="manageList"></div><hr><h3>تغيير كلمة مرور المدير</h3><input id="newPass" type="password" placeholder="كلمة المرور الجديدة"><button onclick="changePass()">تغيير كلمة المرور</button><p class="small">هذه لوحة محلية للتجربة والإدارة على نفس المتصفح والجهاز فقط.</p><button class="red" onclick="logout()">تسجيل خروج المدير</button></div></div></section>
 <footer><strong>GRAND</strong><p>المنظفات • مستحضرات التجميل • الأدوات المنزلية</p><p>نورتونا — مستنيين طلباتكم 💜</p></footer>
 <a class="wa" href="#" onclick="quickWA(event)">واتساب GRAND</a>
 <div class="overlay" id="overlay" onclick="if(event.target===this)cartClose()"><div class="drawer"><div style="display:flex;justify-content:space-between"><h2>سلة طلبك</h2><button class="admin-btn" onclick="cartClose()">✕</button></div><div id="cart"></div><h3 id="total">الإجمالي: 0 ج.م</h3><button style="background:#159b60;width:100%;padding:13px" onclick="send()">إرسال الطلب عبر واتساب</button></div></div>
@@ -215,6 +225,11 @@ const money=n=>new Intl.NumberFormat('ar-EG').format(n)+' ج.م';
 function persist(){localStorage.setItem(KEY,JSON.stringify(data))}
 function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 let page=1;const PAGE_SIZE=48;
+const CATEGORY_IMAGES='grand_category_images_v1';
+function getCategoryImages(){try{return JSON.parse(localStorage.getItem(CATEGORY_IMAGES)||'{}')}catch(e){return {}}}
+function applyCategoryImages(){const saved=getCategoryImages();document.querySelectorAll('.category-card').forEach(card=>{const name=card.getAttribute('data-category');const img=card.querySelector('img');if(name&&img&&saved[name])img.src=saved[name]})}
+function saveCategoryImage(){const name=document.getElementById('categoryImageName').value,file=document.getElementById('categoryImageFile').files[0];if(!file)return alert('اختار صورة الأول');const reader=new FileReader();reader.onload=()=>{const image=new Image();image.onload=()=>{const scale=Math.min(1,900/Math.max(image.width,image.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.width*scale));canvas.height=Math.max(1,Math.round(image.height*scale));canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);const saved=getCategoryImages();saved[name]=canvas.toDataURL('image/jpeg',0.72);try{localStorage.setItem(CATEGORY_IMAGES,JSON.stringify(saved));applyCategoryImages();document.getElementById('categoryImageMsg').textContent='تم تغيير صورة قسم '+name+'.'}catch(e){alert('مساحة التخزين غير كافية. جرّب صورة أصغر.')}};image.onerror=()=>alert('تعذر قراءة الصورة. جرّب صورة أخرى.');image.src=reader.result};reader.readAsDataURL(file)}
+function removeCategoryImage(){const name=document.getElementById('categoryImageName').value,saved=getCategoryImages();delete saved[name];localStorage.setItem(CATEGORY_IMAGES,JSON.stringify(saved));applyCategoryImages();document.getElementById('categoryImageMsg').textContent='تمت إزالة الصورة المخصصة للقسم.'}
 function render(){
  let q=(document.getElementById('search')?.value||'').toLowerCase(),
  c=document.getElementById('filter')?.value||'الكل';
@@ -245,7 +260,7 @@ function quickPrice(id){let p=data.find(x=>x.id===id);if(!p)return;let value=pro
 function edit(id){let p=data.find(x=>x.id===id);document.getElementById('editId').value=p.id;document.getElementById('name').value=p.name;document.getElementById('category').value=p.category;document.getElementById('price').value=p.price;document.getElementById('old').value=p.old;document.getElementById('desc').value=p.desc;window.scrollTo({top:0,behavior:'smooth'})}
 function toggle(id){let p=data.find(x=>x.id===id);p.active=!p.active;persist();adminList();render()}
 function del(id){if(confirm('حذف المنتج؟')){data=data.filter(x=>x.id!==id);persist();adminList();render()}}
-render();cartRender();
+applyCategoryImages();render();cartRender();
 </script>
 <script>
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA worker:', err)); }); }
