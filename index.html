@@ -121,7 +121,15 @@ main{max-width:1320px;padding:34px 30px}
  .group-invite a{width:100%}
 }
 
-</style></head>
+</style>
+<meta name="theme-color" content="#492451">
+<meta name="description" content="متجر GRAND - تسوق منتجات جراند بسهولة">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/grand-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="GRAND">
+</head>
 <body>
 <div class="announcement">✦ أهلاً بيكم في GRAND — كل احتياجات البيت والجمال في مكان واحد ✦</div>
 <header><div class="nav">
@@ -204,4 +212,8 @@ function edit(id){let p=data.find(x=>x.id===id);document.getElementById('editId'
 function toggle(id){let p=data.find(x=>x.id===id);p.active=!p.active;persist();adminList();render()}
 function del(id){if(confirm('حذف المنتج؟')){data=data.filter(x=>x.id!==id);persist();adminList();render()}}
 render();cartRender();
-</script></body></html>
+</script>
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA worker:', err)); }); }
+</script>
+</body></html>

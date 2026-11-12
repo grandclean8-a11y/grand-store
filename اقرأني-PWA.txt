@@ -1,0 +1,9 @@
+GRAND PWA - خطوات الرفع
+
+1) افتح مستودع grand-store على GitHub.
+2) ارفع محتويات المجلد grand_free_simple إلى جذر المستودع (Root)، وليس المجلد نفسه.
+3) وافق على استبدال index.html إذا طُلب ذلك، ثم Commit changes.
+4) انتظر إعادة نشر GitHub Pages.
+5) افتح الموقع عبر HTTPS على Android باستخدام Chrome ثم قائمة ⋮ > Install app / Add to Home screen. على iPhone افتحه في Safari ثم Share > Add to Home Screen.
+
+مهم: الملفات تضيف قابلية التثبيت وكاشًا أساسيًا للملفات الرئيسية. لا تضمن عمل كل الصور أو الطلب عبر واتساب دون إنترنت.
