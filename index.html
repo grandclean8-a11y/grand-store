@@ -228,6 +228,39 @@ body.dark-mode .ad-section{color:#f8edf9}
 body.dark-mode .announcement{background:linear-gradient(90deg,#211629,#493052 48%,#693c68)}
 @media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
 
+
+/* Lamp icon: glowing in night mode, unlit in day mode */
+.theme-toggle{width:48px;height:48px;border:1px solid #d9b9db;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:linear-gradient(145deg,#fffdf4,#f8e8bb);color:#65506a;box-shadow:0 5px 15px #4a2a501c;transition:transform .22s,box-shadow .22s,background .3s}
+.theme-toggle:hover{transform:translateY(-2px) scale(1.06)}
+.theme-toggle:active{transform:scale(.92)}
+.lamp-icon{width:31px;height:31px;overflow:visible}
+.lamp-icon path{stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.lamp-icon .lamp-glow{fill:#f5c95e;stroke:#c18c32;opacity:0;filter:none;transition:opacity .25s,filter .25s}
+.lamp-icon .lamp-rays{opacity:.28;stroke:#a17d45;transition:opacity .25s,filter .25s}
+.theme-toggle.lamp-on{background:radial-gradient(circle,#fff4a8 0%,#f5ce63 48%,#e8a83f 100%);color:#7b4b19;border-color:#ffdf7a;box-shadow:0 0 0 4px #ffd96b25,0 0 22px 8px #ffd65c80,0 4px 15px #bb822c50}
+.theme-toggle.lamp-on .lamp-glow{opacity:1;filter:drop-shadow(0 0 7px #ffd54f)}
+.theme-toggle.lamp-on .lamp-rays{opacity:1;filter:drop-shadow(0 0 3px #ffd54f)}
+.theme-toggle.lamp-off .lamp-glow{opacity:0}
+.theme-toggle.lamp-off .lamp-rays{opacity:.2}
+.ad-section{background:linear-gradient(135deg,#fff9fd,#f5eafa 58%,#e9f8f6);border-color:#ead6eb;color:#43204f}
+.ad-heading{color:#43204f}
+.sign-intro{background:linear-gradient(145deg,#fff0fa,#f1e6ff 65%,#e2f7f5)}
+.sign-intro h2{color:#54285f}
+.sign-intro p{color:#685a70}
+body.dark-mode .ad-section{background:linear-gradient(135deg,#2c2337,#392943 58%,#26383b)!important;border-color:#55405f!important;color:#f8edf9!important;box-shadow:0 16px 42px #0005}
+body.dark-mode .ad-heading,body.dark-mode .ad-heading h2{color:#f8e5fb!important}
+body.dark-mode .ad-heading small{color:#e7a7dd!important}
+body.dark-mode .ad-video-wrap{background:#120e18;border:1px solid #594364;box-shadow:0 12px 32px #0006}
+body.dark-mode .sign-intro{background:linear-gradient(145deg,#392b43,#30263d 65%,#263a3b)!important;border-color:#c47ac0!important;color:#fff!important}
+body.dark-mode .sign-intro h2{color:#ffe3fb!important}
+body.dark-mode .sign-intro small{color:#f0a8df!important}
+body.dark-mode .sign-intro p{color:#d8c7df!important}
+body.dark-mode .sign-frame{background:linear-gradient(135deg,#332a3d,#292335)!important;border-color:#65506e!important}
+body.dark-mode .theme-toggle{background:linear-gradient(145deg,#34293f,#211b2a);border-color:#6d5b7a;color:#c7b4d1;box-shadow:0 3px 12px #0005}
+body.dark-mode .theme-toggle.lamp-on{background:radial-gradient(circle,#fff2a2 0%,#f2bd4c 55%,#a96b27 100%);color:#633a16;border-color:#ffe08a;box-shadow:0 0 0 4px #ffd96b25,0 0 26px 10px #ffd65c99}
+body.dark-mode .theme-toggle.lamp-on .lamp-rays{opacity:1}
+body.dark-mode .theme-toggle.lamp-off .lamp-glow{opacity:0}
+
 </style>
 <meta name="theme-color" content="#492451">
 <meta name="description" content="متجر GRAND - تسوق منتجات جراند بسهولة">
@@ -242,7 +275,8 @@ body.dark-mode .announcement{background:linear-gradient(90deg,#211629,#493052 48
 <header><div class="nav">
 <div class="brand"><div class="brand-symbol">G</div><div><div class="brand-name">GRAND</div><div class="brand-tag">HOME • BEAUTY • CARE</div></div></div>
 <nav class="navlinks"><a href="#categories">الأقسام</a><a href="#whatsapp-group">جروب واتساب</a><a href="#facebook-page">صفحتنا على فيسبوك</a><a href="#branches">عنوان الفرع — لو حابة تنورينا</a><a href="#productSection">المنتجات</a><a href="#our-sign">عن المحل</a></nav>
-<div class="actions"><button id="grandThemeToggle" class="theme-toggle" type="button" onclick="toggleGrandTheme()" aria-label="تبديل الوضع الليلي والنهاري" title="الوضع الليلي / النهاري">💡</button><button class="admin-btn" onclick="adminOpen()">لوحة المدير</button><button class="cart-btn" onclick="cartOpen()">🛒 السلة <span id="count">0</span></button></div>
+<div class="actions"><button id="grandThemeToggle" class="theme-toggle lamp-off" type="button" onclick="toggleGrandTheme()" aria-label="تشغيل الإضاءة والوضع الليلي" title="تشغيل الإضاءة والوضع الليلي">
+<svg class="lamp-icon" viewBox="0 0 48 48" aria-hidden="true"><path class="lamp-rays" d="M24 3v5M8.5 10.5l3.6 3.6M39.5 10.5l-3.6 3.6M4 25h5M39 25h5" /><path class="lamp-glow" d="M15 21a9 9 0 1 1 18 0c0 4-2.5 5.5-4 8H19c-1.5-2.5-4-4-4-8Z"/><path class="lamp-shape" d="M15 21a9 9 0 1 1 18 0c0 4-2.5 5.5-4 8H19c-1.5-2.5-4-4-4-8ZM19 33h10M20 37h8M22 41h4"/></svg></button><button class="admin-btn" onclick="adminOpen()">لوحة المدير</button><button class="cart-btn" onclick="cartOpen()">🛒 السلة <span id="count">0</span></button></div>
 </div></header>
 <main id="shop">
 <section class="hero"><div class="hero-copy"><div class="hero-kicker">اختيارات البيت كلها هنا</div><h1>بيتك يستاهل<br><em>الأحلى مع GRAND</em></h1><p>منظفات، مستحضرات تجميل، ورقيات، معطرات ومستلزمات البيت في مكان واحد.</p><a class="hero-cta" href="#productSection">اكتشف المنتجات <span>←</span></a></div><div class="hero-visual"><div class="hero-logo"><span>G</span></div></div></section>
@@ -374,10 +408,16 @@ function playLampClick(){
  }catch(e){}
 }
 function applyGrandTheme(mode){
- document.body.classList.toggle('dark-mode',mode==='night');
+ const night=mode==='night';
+ document.body.classList.toggle('dark-mode',night);
  const b=document.getElementById('grandThemeToggle');
- if(b){b.textContent=mode==='night'?'🌙':'💡';b.title=mode==='night'?'تفعيل الوضع النهاري':'تفعيل الوضع الليلي';b.setAttribute('aria-label',b.title)}
- const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=mode==='night'?'#211b29':'#492451';
+ if(b){
+  b.classList.toggle('lamp-on',night);
+  b.classList.toggle('lamp-off',!night);
+  b.title=night?'الإضاءة شغالة — اضغط للوضع النهاري':'الإضاءة مطفأة — اضغط للوضع الليلي';
+  b.setAttribute('aria-label',b.title);
+ }
+ const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=night?'#211b29':'#492451';
 }
 function toggleGrandTheme(){
  const next=document.body.classList.contains('dark-mode')?'day':'night';
