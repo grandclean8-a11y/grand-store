@@ -206,6 +206,28 @@ main{max-width:1360px}
 @media(max-width:650px){.hero{background:radial-gradient(circle at 85% 15%,#ffb5dc55,transparent 35%),linear-gradient(135deg,#39204e,#794181 58%,#bd5798)}.hero-logo{display:none}.sign-frame{padding:8px;border-radius:16px}.sign-frame img{animation:signFloat 8s ease-in-out infinite}.category-overlay{padding:18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+
+/* GRAND day/night lamp switch */
+.theme-toggle{width:44px;height:44px;display:inline-grid;place-items:center;border:1px solid #e8cde8;border-radius:50%;background:linear-gradient(145deg,#fff4bd,#ffd76b);color:#59315f;font-size:22px;cursor:pointer;box-shadow:0 5px 16px #b77b382e;transition:transform .2s,box-shadow .2s}
+.theme-toggle:hover{transform:rotate(-12deg) scale(1.08);box-shadow:0 8px 22px #b77b3855}
+.theme-toggle:active{transform:scale(.91)}
+body.dark-mode{--plum:#e8c4f0;--plum2:#f3ddf5;--violet:#e7a9dc;--lilac:#382b43;--cream:#211b29;--paper:#2b2433;--ink:#f8edf9;--muted:#c5b4ca;--line:#4a3a52;--shadow:0 18px 48px rgba(0,0,0,.3);background:linear-gradient(180deg,#1c1724,#241b2d 52%,#1b1b2b);color:#f8edf9}
+body.dark-mode header{background:rgba(35,28,44,.96);border-color:#493750}
+body.dark-mode .brand-name,body.dark-mode .navlinks a,body.dark-mode .section-title h2,body.dark-mode .shop-head h2,body.dark-mode .group-invite h2{color:#f4d8f3}
+body.dark-mode .brand-tag,body.dark-mode .section-title p,body.dark-mode .shop-head p{color:#c6b2cc}
+body.dark-mode .admin-btn{background:#493650;color:#ffeaff}
+body.dark-mode .theme-toggle{background:linear-gradient(145deg,#51436c,#29243d);border-color:#77628d;color:#ffe99a;box-shadow:0 0 18px #bda0ff35}
+body.dark-mode .sign-intro,body.dark-mode .sign-frame,body.dark-mode .shop-section,body.dark-mode .card,body.dark-mode .group-invite{background:#2b2433!important;border-color:#51405b;color:#f8edf9}
+body.dark-mode .sign-frame{background:linear-gradient(135deg,#332a3d,#292335)!important}
+body.dark-mode .category-card{filter:brightness(.84) saturate(.9)}
+body.dark-mode .category-overlay{background:linear-gradient(to top,rgba(15,10,23,.96),rgba(40,25,48,.35) 68%,transparent)}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea{background:#211b29!important;color:#fff!important;border-color:#5b4964!important}
+body.dark-mode .drawer,body.dark-mode .modal,body.dark-mode .admin-panel{background:#2b2433;color:#f8edf9}
+body.dark-mode footer{background:#18131f;color:#f7eaf8}
+body.dark-mode .ad-section{color:#f8edf9}
+body.dark-mode .announcement{background:linear-gradient(90deg,#211629,#493052 48%,#693c68)}
+@media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
+
 </style>
 <meta name="theme-color" content="#492451">
 <meta name="description" content="متجر GRAND - تسوق منتجات جراند بسهولة">
@@ -220,7 +242,7 @@ main{max-width:1360px}
 <header><div class="nav">
 <div class="brand"><div class="brand-symbol">G</div><div><div class="brand-name">GRAND</div><div class="brand-tag">HOME • BEAUTY • CARE</div></div></div>
 <nav class="navlinks"><a href="#categories">الأقسام</a><a href="#whatsapp-group">جروب واتساب</a><a href="#facebook-page">صفحتنا على فيسبوك</a><a href="#branches">عنوان الفرع — لو حابة تنورينا</a><a href="#productSection">المنتجات</a><a href="#our-sign">عن المحل</a></nav>
-<div class="actions"><button class="admin-btn" onclick="adminOpen()">لوحة المدير</button><button class="cart-btn" onclick="cartOpen()">🛒 السلة <span id="count">0</span></button></div>
+<div class="actions"><button id="grandThemeToggle" class="theme-toggle" type="button" onclick="toggleGrandTheme()" aria-label="تبديل الوضع الليلي والنهاري" title="الوضع الليلي / النهاري">💡</button><button class="admin-btn" onclick="adminOpen()">لوحة المدير</button><button class="cart-btn" onclick="cartOpen()">🛒 السلة <span id="count">0</span></button></div>
 </div></header>
 <main id="shop">
 <section class="hero"><div class="hero-copy"><div class="hero-kicker">اختيارات البيت كلها هنا</div><h1>بيتك يستاهل<br><em>الأحلى مع GRAND</em></h1><p>منظفات، مستحضرات تجميل، ورقيات، معطرات ومستلزمات البيت في مكان واحد.</p><a class="hero-cta" href="#productSection">اكتشف المنتجات <span>←</span></a></div><div class="hero-visual"><div class="hero-logo"><span>G</span></div></div></section>
@@ -336,5 +358,33 @@ applyCategoryImages();render();cartRender();loadCloudProducts();loadCloudCategor
 </script>
 <script>
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA worker:', err)); }); }
+
+const GRAND_THEME_KEY='grand_theme_mode';
+function playLampClick(){
+ try{
+  const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
+  const ctx=new Ctx(),osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type='sine';osc.frequency.setValueAtTime(1050,ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(620,ctx.currentTime+.055);
+  gain.gain.setValueAtTime(.0001,ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.055,ctx.currentTime+.008);
+  gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.075);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.08);
+  osc.onended=()=>ctx.close();
+ }catch(e){}
+}
+function applyGrandTheme(mode){
+ document.body.classList.toggle('dark-mode',mode==='night');
+ const b=document.getElementById('grandThemeToggle');
+ if(b){b.textContent=mode==='night'?'🌙':'💡';b.title=mode==='night'?'تفعيل الوضع النهاري':'تفعيل الوضع الليلي';b.setAttribute('aria-label',b.title)}
+ const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=mode==='night'?'#211b29':'#492451';
+}
+function toggleGrandTheme(){
+ const next=document.body.classList.contains('dark-mode')?'day':'night';
+ try{localStorage.setItem(GRAND_THEME_KEY,next)}catch(e){}
+ applyGrandTheme(next);playLampClick();
+}
+try{if(localStorage.getItem(GRAND_THEME_KEY)==='night')applyGrandTheme('night')}catch(e){}
+
 </script>
 </body></html>
