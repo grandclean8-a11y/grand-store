@@ -261,6 +261,52 @@ body.dark-mode .theme-toggle.lamp-on{background:radial-gradient(circle,#fff2a2 0
 body.dark-mode .theme-toggle.lamp-on .lamp-rays{opacity:1}
 body.dark-mode .theme-toggle.lamp-off .lamp-glow{opacity:0}
 
+
+/* GRAND contrast fix + lamp state polish */
+.branch-section{
+  background:#fff;
+  color:#2d2032;
+  border-color:#eaddec;
+  box-shadow:0 16px 40px rgba(70,35,78,.09);
+}
+.branch-section .section-title h2{color:#51275f!important}
+.branch-section .section-title p{color:#615568!important}
+.branch-card{
+  background:linear-gradient(145deg,#fffafd,#f8f1fa);
+  border-color:#e5d3e9;
+}
+.branch-card h3{color:#54285f}
+.branch-card p{color:#594d60}
+.branch-card a{color:#087c55}
+body.dark-mode .branch-section{
+  background:linear-gradient(135deg,#2b2433,#30263b 60%,#253337)!important;
+  border-color:#51405b!important;
+  color:#f8edf9!important;
+  box-shadow:0 16px 42px #0005;
+}
+body.dark-mode .branch-section .section-title h2{color:#ffe3fb!important}
+body.dark-mode .branch-section .section-title p{color:#d8c7df!important}
+body.dark-mode .branch-card{
+  background:linear-gradient(145deg,#382b43,#30263d 65%,#26383b)!important;
+  border-color:#5b4866!important;
+}
+body.dark-mode .branch-card h3{color:#ffe0f8!important}
+body.dark-mode .branch-card p{color:#ded1e4!important}
+body.dark-mode .branch-card a{color:#78e0b8!important}
+.theme-toggle.lamp-on{
+  background:radial-gradient(circle,#fff4a8 0%,#f5ce63 48%,#e8a83f 100%)!important;
+  color:#704516!important;border-color:#ffdf7a!important;
+  box-shadow:0 0 0 4px #ffd96b25,0 0 24px 9px #ffd65c80,0 4px 15px #bb822c50!important;
+}
+.theme-toggle.lamp-off{
+  background:linear-gradient(145deg,#40354b,#241e30)!important;
+  color:#b5a7c5!important;border-color:#685876!important;
+  box-shadow:0 3px 12px #0005!important;
+}
+body.dark-mode .theme-toggle.lamp-off{
+  background:linear-gradient(145deg,#34293f,#211b2a)!important;
+}
+
 </style>
 <meta name="theme-color" content="#492451">
 <meta name="description" content="متجر GRAND - تسوق منتجات جراند بسهولة">
@@ -412,9 +458,9 @@ function applyGrandTheme(mode){
  document.body.classList.toggle('dark-mode',night);
  const b=document.getElementById('grandThemeToggle');
  if(b){
-  b.classList.toggle('lamp-on',night);
-  b.classList.toggle('lamp-off',!night);
-  b.title=night?'الإضاءة شغالة — اضغط للوضع النهاري':'الإضاءة مطفأة — اضغط للوضع الليلي';
+  b.classList.toggle('lamp-on',!night);
+  b.classList.toggle('lamp-off',night);
+  b.title=night?'الإضاءة مطفأة — اضغط لتنور المتجر':'الإضاءة شغالة — اضغط تطفي الإضاءة وتفعّل الوضع الليلي';
   b.setAttribute('aria-label',b.title);
  }
  const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=night?'#211b29':'#492451';
@@ -424,7 +470,7 @@ function toggleGrandTheme(){
  try{localStorage.setItem(GRAND_THEME_KEY,next)}catch(e){}
  applyGrandTheme(next);playLampClick();
 }
-try{if(localStorage.getItem(GRAND_THEME_KEY)==='night')applyGrandTheme('night')}catch(e){}
+try{applyGrandTheme(localStorage.getItem(GRAND_THEME_KEY)==='night'?'night':'day')}catch(e){applyGrandTheme('day')}
 
 </script>
 </body></html>
