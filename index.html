@@ -242,9 +242,9 @@ const money=n=>new Intl.NumberFormat('ar-EG').format(n)+' ج.م';
 function persist(){localStorage.setItem(KEY,JSON.stringify(data))}
 function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 let page=1;const PAGE_SIZE=48;
-const CATEGORY_IMAGES='grand_category_images_v1';let categoryImagesCache={};
+const CATEGORY_IMAGES='grand_category_images_v1';const DEFAULT_CATEGORY_IMAGES={'السوايل':'./images/categories/grand-liquids.webp'};let categoryImagesCache={...DEFAULT_CATEGORY_IMAGES};
 function getCategoryImages(){return categoryImagesCache}
-async function loadCloudCategoryImages(){const {data,error}=await supabaseClient.from('grand_settings').select('value').eq('key','category_images').maybeSingle();if(error){console.warn('GRAND category images:',error.message);return}categoryImagesCache=data?.value&&typeof data.value==='object'?data.value:{};localStorage.setItem(CATEGORY_IMAGES,JSON.stringify(categoryImagesCache));applyCategoryImages()}
+async function loadCloudCategoryImages(){const {data,error}=await supabaseClient.from('grand_settings').select('value').eq('key','category_images').maybeSingle();if(error){console.warn('GRAND category images:',error.message);return}categoryImagesCache={...DEFAULT_CATEGORY_IMAGES,...(data?.value&&typeof data.value==='object'?data.value:{})};localStorage.setItem(CATEGORY_IMAGES,JSON.stringify(categoryImagesCache));applyCategoryImages()}
 function mapCloudProduct(p){return {id:p.id,name:p.name,category:p.category,price:Number(p.price)||0,old:p.old_price==null?'':Number(p.old_price),desc:p.description||'',image:p.image_url||'',active:p.active!==false,sort_order:p.sort_order||0}}
 function cloudProduct(p){return {id:String(p.id),name:p.name,category:p.category,price:Number(p.price)||0,old_price:p.old===''||p.old==null?null:Number(p.old),description:p.desc||'',image_url:p.image||'',active:p.active!==false,sort_order:Number(p.sort_order)||0,updated_at:new Date().toISOString()}}
 async function loadCloudProducts(){const {data:rows,error}=await supabaseClient.from('grand_products').select('*').order('sort_order',{ascending:true});if(error){console.warn('GRAND products cloud load:',error.message);return false}if(rows){data=rows.map(mapCloudProduct);localStorage.setItem(KEY,JSON.stringify(data));render();if(logged)adminList()}return true}
