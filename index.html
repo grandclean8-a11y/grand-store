@@ -416,7 +416,7 @@ function render(){
 }
 
 function filter(c){document.getElementById('filter').value=c;render();document.getElementById('productSection').scrollIntoView({behavior:'smooth'})}
-function add(id){let x=cart.find(p=>p.id===id);x?x.qty++:cart.push({id,qty:1});cartRender()}
+function add(id){let x=cart.find(p=>p.id===id);x?x.qty++:cart.push({id,qty:1});cartRender();playCartAddSound()}
 function cartRender(){document.getElementById('count').textContent=cart.reduce((s,x)=>s+x.qty,0);document.getElementById('cart').innerHTML=cart.map(x=>{let p=data.find(y=>y.id===x.id);return `<div class="line"><span>${esc(p.name)} × ${x.qty}</span><span><button onclick="qty('${x.id}',-1)">−</button> <button onclick="qty('${x.id}',1)">+</button></span></div>`}).join('')||'<p>السلة فارغة.</p>';document.getElementById('total').textContent='الإجمالي: '+money(cart.reduce((s,x)=>s+Number(data.find(p=>p.id===x.id).price)*x.qty,0))}
 function qty(id,d){let x=cart.find(p=>p.id===id);x.qty+=d;if(x.qty<1)cart=cart.filter(p=>p.id!==id);cartRender()}
 function cartOpen(){document.getElementById('overlay').classList.add('open')}function cartClose(){document.getElementById('overlay').classList.remove('open')}
@@ -440,6 +440,25 @@ applyCategoryImages();render();cartRender();loadCloudProducts();loadCloudCategor
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA worker:', err)); }); }
 
 const GRAND_THEME_KEY='grand_theme_mode';
+
+function playCartAddSound(){
+ try{
+  const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
+  const ctx=new Ctx(),now=ctx.currentTime;
+  const notes=[{f:880,t:0,d:.09},{f:1175,t:.075,d:.12},{f:1568,t:.16,d:.16}];
+  notes.forEach(n=>{
+   const osc=ctx.createOscillator(),gain=ctx.createGain();
+   osc.type='sine';osc.frequency.setValueAtTime(n.f,now+n.t);
+   gain.gain.setValueAtTime(.0001,now+n.t);
+   gain.gain.exponentialRampToValueAtTime(.10,now+n.t+.012);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+n.t+n.d);
+   osc.connect(gain);gain.connect(ctx.destination);
+   osc.start(now+n.t);osc.stop(now+n.t+n.d+.01);
+  });
+  setTimeout(()=>ctx.close(),500);
+ }catch(e){}
+}
+
 function playLampClick(){
  try{
   const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
