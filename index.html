@@ -319,7 +319,7 @@ body.dark-mode .theme-toggle.lamp-off{
 </head>
 <body>
 <div id="grandAuth" class="grand-auth"><div class="grand-auth-card"><div class="grand-auth-mark">G</div><h1>أهلاً بيك في GRAND</h1><p class="grand-auth-sub">سجّل دخولك أو أنشئ حساب جديد عشان تكمل التسوق وتتابع طلباتك</p><div class="grand-auth-tabs"><button id="authLoginTab" class="active" type="button" onclick="showAuthMode('login')">تسجيل الدخول</button><button id="authSignupTab" type="button" onclick="showAuthMode('signup')">إنشاء حساب</button></div><form id="grandAuthForm" onsubmit="submitCustomerAuth(event)"><label for="authEmail">البريد الإلكتروني</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com" required><label for="authPassword">كلمة السر</label><input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="6 أحرف على الأقل" required><div id="authConfirmPasswordWrap" class="hidden"><label for="authConfirmPassword">تأكيد كلمة السر</label><input id="authConfirmPassword" type="password" autocomplete="new-password" minlength="6" placeholder="اكتب كلمة السر مرة تانية"></div><button id="authSubmit" class="grand-auth-submit" type="submit">تسجيل الدخول</button></form><p id="authMessage" class="grand-auth-message" aria-live="polite"></p><p class="grand-auth-note">حسابك هيفضل مفتوح على جهازك لحد ما تختار تسجيل الخروج.</p></div></div>
-<div id="grandApp">
+<div id="grandApp" class="hidden">
 <div class="announcement">✦ أهلاً بيكم في GRAND — كل احتياجات البيت والجمال في مكان واحد ✦</div>
 <header><div class="nav">
 <div class="brand"><div class="brand-symbol">G</div><div><div class="brand-name">GRAND</div><div class="brand-tag">HOME • BEAUTY • CARE</div></div></div>
