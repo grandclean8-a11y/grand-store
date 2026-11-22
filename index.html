@@ -445,17 +445,24 @@ function playCartAddSound(){
  try{
   const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
   const ctx=new Ctx(),now=ctx.currentTime;
-  const notes=[{f:880,t:0,d:.09},{f:1175,t:.075,d:.12},{f:1568,t:.16,d:.16}];
-  notes.forEach(n=>{
+  if(ctx.state==='suspended')ctx.resume();
+  // Cash-register "ka-ching": a bright metallic bell, a rising coin ring, and a soft drawer clack.
+  const strike=(freq,delay,duration,volume,type='sine')=>{
    const osc=ctx.createOscillator(),gain=ctx.createGain();
-   osc.type='sine';osc.frequency.setValueAtTime(n.f,now+n.t);
-   gain.gain.setValueAtTime(.0001,now+n.t);
-   gain.gain.exponentialRampToValueAtTime(.10,now+n.t+.012);
-   gain.gain.exponentialRampToValueAtTime(.0001,now+n.t+n.d);
+   osc.type=type;osc.frequency.setValueAtTime(freq,now+delay);
+   gain.gain.setValueAtTime(.0001,now+delay);
+   gain.gain.exponentialRampToValueAtTime(volume,now+delay+.006);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+delay+duration);
    osc.connect(gain);gain.connect(ctx.destination);
-   osc.start(now+n.t);osc.stop(now+n.t+n.d+.01);
-  });
-  setTimeout(()=>ctx.close(),500);
+   osc.start(now+delay);osc.stop(now+delay+duration+.02);
+  };
+  // Main register bell with shimmering upper harmonics.
+  [[988,0,.34,.12],[1480,.006,.30,.075],[1976,.012,.26,.045],[2960,.018,.22,.025]].forEach(a=>strike(...a));
+  // A second, slightly higher "ching" gives the familiar cash-register flourish.
+  [[1318,.105,.42,.085],[1976,.112,.36,.05],[2637,.12,.30,.03],[3955,.13,.24,.016]].forEach(a=>strike(...a));
+  // Soft mechanical drawer/cash impact underneath the chime.
+  strike(125,.035,.075,.055,'triangle');
+  setTimeout(()=>ctx.close(),850);
  }catch(e){}
 }
 
