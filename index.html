@@ -457,11 +457,11 @@ function playCartAddSound(){
    osc.start(now+delay);osc.stop(now+delay+duration+.02);
   };
   // Main register bell with shimmering upper harmonics.
-  [[988,0,.34,.12],[1480,.006,.30,.075],[1976,.012,.26,.045],[2960,.018,.22,.025]].forEach(a=>strike(...a));
+  [[988,0,.34,.24],[1480,.006,.30,.15],[1976,.012,.26,.09],[2960,.018,.22,.10]].forEach(a=>strike(...a));
   // A second, slightly higher "ching" gives the familiar cash-register flourish.
-  [[1318,.105,.42,.085],[1976,.112,.36,.05],[2637,.12,.30,.03],[3955,.13,.24,.016]].forEach(a=>strike(...a));
+  [[1318,.105,.42,.17],[1976,.112,.36,.10],[2637,.12,.30,.06],[3955,.13,.24,.032]].forEach(a=>strike(...a));
   // Soft mechanical drawer/cash impact underneath the chime.
-  strike(125,.035,.075,.055,'triangle');
+  strike(125,.035,.075,.11,'triangle');
   setTimeout(()=>ctx.close(),850);
  }catch(e){}
 }
