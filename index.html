@@ -11,7 +11,7 @@
 header{position:sticky;top:0;z-index:10;background:#fffdfb;border-bottom:1px solid #eee5ed}.nav{max-width:1240px;margin:auto;min-height:78px;padding:10px 25px;display:flex;align-items:center;justify-content:space-between;gap:22px}
 .brand{display:flex;align-items:center;gap:12px}.brand-symbol{width:48px;height:48px;border-radius:50% 50% 50% 12px;background:var(--plum);color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:28px;font-weight:900;transform:rotate(-5deg);box-shadow:5px 5px 0 #d7b8df}.brand-name{font-size:25px;font-weight:900;color:var(--plum);line-height:1.1;letter-spacing:1px}.brand-tag{font-size:10px;color:#9b829f;letter-spacing:1.6px}
 .navlinks{display:flex;gap:25px;align-items:center}.navlinks a{color:#5d4c61;text-decoration:none;font-size:13px;font-weight:700}.navlinks a:hover{color:var(--violet)}
-.actions{display:flex;gap:9px;align-items:center}.cart-btn,.admin-btn{border-radius:30px;padding:10px 17px;font-weight:800}.cart-btn{background:var(--plum);color:white}.admin-btn{background:#f2e8f3;color:var(--plum)}
+.actions{display:flex;gap:9px;align-items:center}.share-btn{border:0;border-radius:30px;padding:10px 15px;font-weight:800;background:#e9d8ed;color:#54285f;cursor:pointer;white-space:nowrap}.share-btn:hover{background:#dbc1e2;transform:translateY(-1px)}.cart-btn,.admin-btn{border-radius:30px;padding:10px 17px;font-weight:800}.cart-btn{background:var(--plum);color:white}.admin-btn{background:#f2e8f3;color:var(--plum)}
 main{max-width:1240px;margin:auto;padding:25px}
 .hero{min-height:390px;position:relative;overflow:hidden;border-radius:8px 70px 8px 70px;background:linear-gradient(110deg,#3a1d45,#62376d 57%,#a879ad);color:#fff;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;padding:clamp(28px,5vw,65px);box-shadow:0 25px 60px #4b2a5525}
 .hero:before{content:"";position:absolute;width:430px;height:430px;border:1px solid #ffffff30;border-radius:50%;left:-130px;top:-190px;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff06}
@@ -321,7 +321,7 @@ body.dark-mode .theme-toggle.lamp-off{
 <header><div class="nav">
 <div class="brand"><div class="brand-symbol">G</div><div><div class="brand-name">GRAND</div><div class="brand-tag">HOME • BEAUTY • CARE</div></div></div>
 <nav class="navlinks"><a href="#categories">الأقسام</a><a href="#whatsapp-group">جروب واتساب</a><a href="#facebook-page">صفحتنا على فيسبوك</a><a href="#branches">عنوان الفرع — لو حابة تنورينا</a><a href="#productSection">المنتجات</a><a href="#our-sign">عن المحل</a></nav>
-<div class="actions"><button id="grandThemeToggle" class="theme-toggle lamp-off" type="button" onclick="toggleGrandTheme()" aria-label="تشغيل الإضاءة والوضع الليلي" title="تشغيل الإضاءة والوضع الليلي">
+<div class="actions"><button class="share-btn" type="button" onclick="shareGrandSite()" aria-label="مشاركة متجر GRAND">↗ مشاركة</button><button id="grandThemeToggle" class="theme-toggle lamp-off" type="button" onclick="toggleGrandTheme()" aria-label="تشغيل الإضاءة والوضع الليلي" title="تشغيل الإضاءة والوضع الليلي">
 <svg class="lamp-icon" viewBox="0 0 48 48" aria-hidden="true"><path class="lamp-rays" d="M24 3v5M8.5 10.5l3.6 3.6M39.5 10.5l-3.6 3.6M4 25h5M39 25h5" /><path class="lamp-glow" d="M15 21a9 9 0 1 1 18 0c0 4-2.5 5.5-4 8H19c-1.5-2.5-4-4-4-8Z"/><path class="lamp-shape" d="M15 21a9 9 0 1 1 18 0c0 4-2.5 5.5-4 8H19c-1.5-2.5-4-4-4-8ZM19 33h10M20 37h8M22 41h4"/></svg></button><button class="admin-btn" onclick="adminOpen()">لوحة المدير</button><button class="cart-btn" onclick="cartOpen()">🛒 السلة <span id="count">0</span></button></div>
 </div></header>
 <main id="shop">
@@ -438,6 +438,24 @@ applyCategoryImages();render();cartRender();loadCloudProducts();loadCloudCategor
 </script>
 <script>
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA worker:', err)); }); }
+
+async function shareGrandSite(){
+ const url=window.location.href.split('#')[0];
+ const shareData={title:'متجر GRAND',text:'شوفوا متجر GRAND واختاروا منتجاتكم واطلبوا بسهولة عبر واتساب 💜',url};
+ try{
+  if(navigator.share && (!navigator.canShare || navigator.canShare(shareData))){
+   await navigator.share(shareData);
+  }else{
+   const message=shareData.text+' '+url;
+   window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener');
+  }
+ }catch(e){
+  if(e && e.name!=='AbortError'){
+   const message=shareData.text+' '+url;
+   window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener');
+  }
+ }
+}
 
 const GRAND_THEME_KEY='grand_theme_mode';
 
